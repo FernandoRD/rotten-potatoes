@@ -1,0 +1,46 @@
+version: '3.8'
+
+volumes:
+  mongodb_vol:
+
+networks:
+  default:
+    name: mongodb-network
+
+services:
+
+  app:
+    image: fernandord/rotten-potatoes:v1
+    container_name: app_rotten_potatoes
+    restart: always
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongodb_server
+
+
+  mongodb_server:
+    image: mongo
+    container_name: mongodb_server
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: admin
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: mongopwd
+    #volumes:
+    #  - mongodb_vol:/data/db
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: mongouser
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongopwd
+      ME_CONFIG_MONGODB_URL: mongodb://mongouser:mongopwd@mongodb_server:27017/
+    depends_on:
+      - mongodb_server
