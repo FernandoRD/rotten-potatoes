@@ -1,5 +1,5 @@
 pipeline{
-    agent { label 'docker_executor' }
+    agent { label 'homeserver' }
 
     stages{
         stage('Checkout Source'){
