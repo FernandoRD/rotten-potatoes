@@ -12,7 +12,7 @@ MONGODB_PORT = os.getenv("MONGODB_PORT", 27017)
 MONGODB_USERNAME = os.getenv("MONGODB_USERNAME", "mongouser")
 MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD", "mongopwd") 
 
-def on_starting(server):    
+def on_starting():    
 
     CONNECTION_STRING = "mongodb://" + MONGODB_USERNAME + ":" + MONGODB_PASSWORD + "@" + MONGODB_HOST
     client = MongoClient(CONNECTION_STRING)
@@ -49,4 +49,7 @@ def on_starting(server):
                     
                     collection.insert_one(filme)
                     
-            arquivo.close() 
+            arquivo.close()
+            
+if __name__ == '__main__':
+    on_starting
