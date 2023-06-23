@@ -9,6 +9,7 @@ import bson
 from prometheus_flask_exporter import PrometheusMetrics
 from middleware import set_unhealth, set_unready_for_seconds, middleware
 from datetime import datetime
+import config
 
 app = Flask(__name__,
             static_url_path='', 
@@ -99,4 +100,5 @@ def ready():
     return Response('OK')
 
 if __name__ == '__main__':
+    config.on_starting
     app.run()

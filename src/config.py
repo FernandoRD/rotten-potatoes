@@ -51,5 +51,3 @@ def on_starting():
                     
             arquivo.close()
             
-if __name__ == '__main__':
-    on_starting
