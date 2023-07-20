@@ -1,5 +1,5 @@
 pipeline{
-    agent { label 'homeserver' }
+    agent { label 'antares' }
 
     stages{
         stage('Checkout Source'){
