@@ -10,7 +10,7 @@ pipeline{
         stage('Build Image'){
             steps{
                 script{
-                    dockerapp = docker.build("fernandord/rotten-potatoes:v${env.BUILD_ID}", '-f ./src/Dockerfile .')
+                    dockerapp = docker.build("fernandord/rotten-potatoes:${env.BUILD_ID}", '-f ./src/Dockerfile .')
                 }
             }
         
